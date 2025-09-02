@@ -6,26 +6,26 @@ require('dotenv').config();
 const productRoutes = require('./routes/productRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const orderRoutes = require('./routes/orderRoutes');
-const userRoutes = require('./routes/userRoutes'); // New import
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI;
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// Correct Middleware Order
+app.use(express.json()); // Parses the request body first
+app.use(cors()); // Then handles CORS headers
 
 // Connect to MongoDB
 mongoose.connect(MONGO_URI)
   .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Routes
+// Routes must come after middleware
 app.use('/api/products', productRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/orders', orderRoutes);
-app.use('/api/users', userRoutes); // New route for user authentication
+app.use('/api/users', userRoutes);
 
 // Simple root route for testing
 app.get('/', (req, res) => {
