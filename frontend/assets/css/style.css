@@ -1,7 +1,0 @@
-
-:root{ --primary-gradient: linear-gradient(135deg, seagreen, #2e8b57); }
-body{ font-family: Inter, Roboto, Arial; margin:0; padding:0; background:#f7f9fc; color:#222;}
-.navbar{ background:var(--primary-gradient); padding:10px; color:#fff;}
-.footer{ background:#2e8b57; color:#fff; padding:16px; text-align:center; }
-.product-img{ height:180px; object-fit:cover; width:100%; border-radius:6px;}
-.table-img{ width:80px; height:60px; object-fit:cover; border-radius:6px;}
