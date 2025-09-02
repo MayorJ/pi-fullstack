@@ -1,9 +1,8 @@
-// routes/userRoutes.js
-
 const express = require('express');
 const router = express.Router();
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs'); // Make sure bcryptjs is imported if you are using it here
 
 // Utility function to generate a JWT
 const generateToken = (id) => {
@@ -17,7 +16,6 @@ const generateToken = (id) => {
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
   
-  // Basic validation
   if (!username || !email || !password) {
     return res.status(400).json({ msg: 'Please enter all fields' });
   }
@@ -36,7 +34,6 @@ router.post('/register', async (req, res) => {
     
     await newUser.save();
     
-    // Respond with user data and token
     res.status(201).json({
       _id: newUser._id,
       username: newUser.username,
