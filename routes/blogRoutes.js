@@ -1,27 +1,31 @@
+// routes/blogRoutes.js
+
 const express = require('express');
-const Blog = require('../models/Blog');
 const router = express.Router();
+const Blog = require('../models/blogModel');
 
-// GET all blogs or featured blogs
+// @route GET /api/blogs
+// @desc Get all blogs
 router.get('/', async (req, res) => {
-  try {
-    const query = req.query.featured ? { isFeatured: true } : {};
-    const blogs = await Blog.find(query).limit(req.query.featured ? 3 : 0);
-    res.json(blogs);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+    try {
+        const blogs = await Blog.find({});
+        res.json(blogs);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 });
 
-// POST a new blog (for admin use)
-router.post('/', async (req, res) => {
-  const blog = new Blog(req.body);
-  try {
-    const newBlog = await blog.save();
-    res.status(201).json(newBlog);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+// @route GET /api/blogs/featured
+// @desc Get all featured blogs
+router.get('/featured', async (req, res) => {
+    try {
+        const featuredBlogs = await Blog.find({ isFeatured: true });
+        res.json(featuredBlogs);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 });
+
+// ... your other blog routes for post, put, delete etc.
 
 module.exports = router;
