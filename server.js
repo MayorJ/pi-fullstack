@@ -6,7 +6,7 @@ require('dotenv').config();
 const productRoutes = require('./routes/productRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const orderRoutes = require('./routes/orderRoutes');
-const userRoutes = require('./routes/userRoutes');
+// const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,7 +25,7 @@ mongoose.connect(MONGO_URI)
 app.use('/api/products', productRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/orders', orderRoutes);
-app.use('/api/users', userRoutes);
+// app.use('/api/users', userRoutes);
 
 // Simple root route for testing
 app.get('/', (req, res) => {
