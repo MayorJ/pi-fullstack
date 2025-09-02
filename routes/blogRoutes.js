@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const Blog = require('../models/blogModel');
+const Blog = require('../models/Blog');
 
 // @route GET /api/blogs
 // @desc Get all blogs
